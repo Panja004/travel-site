@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
 const listingSchema = new Schema({
   title: {
     type: String,
@@ -7,12 +8,12 @@ const listingSchema = new Schema({
   },
   description: String,
   image: {
-    type: String,
+    type: Object,
     default:
-      "https://media.istockphoto.com/id/472909442/photo/backwaters-of-kerala.jpg?s=1024x1024&w=is&k=20&c=qk78ulZiULc2kzRzfROMm1878rOKb4wYhM2GsQ_dH-8=",
+      "https://images.unsplash.com/photo-1625505826533-5c80aca7d157?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdvYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
     set: (v) =>
-      v === " "
-        ? "https://media.istockphoto.com/id/472909442/photo/backwaters-of-kerala.jpg?s=1024x1024&w=is&k=20&c=qk78ulZiULc2kzRzfROMm1878rOKb4wYhM2GsQ_dH-8="
+      v === ""
+        ? "https://images.unsplash.com/photo-1625505826533-5c80aca7d157?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdvYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"
         : v,
   },
   price: Number,
