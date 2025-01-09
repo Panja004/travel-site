@@ -6,7 +6,7 @@
 
     <div class="card listing-card">
       <img
-        src="<%= listing.image %>"
+        src="<%= listing.image.url %>"
         class="card-img-top show-img"
         alt="listing_image"
       />
@@ -50,15 +50,55 @@
     >
       <div class="mb-3 mt-3">
         <label class="form-label" for="rating">Rating</label>
-        <input
-          type="range"
-          class="form-range"
-          min="1"
-          max="5"
-          id="rating"
-          name="review[rating]"
-        />
+
+        <fieldset class="starability-heart">
+          <input
+            type="radio"
+            id="no-rate"
+            class="input-no-rate"
+            name="review[rating]"
+            value="1"
+            checked
+            aria-label="No rating."
+          />
+          <input
+            type="radio"
+            id="first-rate1"
+            name="review[rating]"
+            value="1"
+          />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input
+            type="radio"
+            id="first-rate2"
+            name="review[rating]"
+            value="2"
+          />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input
+            type="radio"
+            id="first-rate3"
+            name="review[rating]"
+            value="3"
+          />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input
+            type="radio"
+            id="first-rate4"
+            name="review[rating]"
+            value="4"
+          />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input
+            type="radio"
+            id="first-rate5"
+            name="review[rating]"
+            value="5"
+          />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
       </div>
+
       <div class="mb-3 mt-3">
         <label class="form-label" for="comment">Comments</label>
         <textarea
@@ -78,15 +118,18 @@
     <hr />
     <% } %>
 
-    <p><b>All Reviews</b></p>
+    <h3>Reviews</h3>
 
     <div class="row">
       <% for(review of listing.reviews) { %>
       <div class="card col-5 mb-3 ms-3">
         <div class="card-body">
           <h5 class="card-title">@<%= review.author.username %></h5>
+          <p
+            class="starability-result card-text"
+            data-rating="<%= review.rating %>"
+          ></p>
           <p class="card-text"><%= review.comment %></p>
-          <p class="card-text"><%= review.rating %> stars</p>
         </div>
         <form
           action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
